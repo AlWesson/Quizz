@@ -1,0 +1,21 @@
+body {
+    background-color:silver;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+header {
+    align-self: center;
+    font-family:fantasy;
+    color: orange;
+    background-color: dimgray;
+    padding: 0 5% 0 5%;
+    font-size: larger;
+    box-shadow: 0 4px 9px 0 darkslategray;
+}
+.main-box {
+    display: block;
+    background-color: burlywood;
+    
+}
