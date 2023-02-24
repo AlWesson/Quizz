@@ -4,6 +4,10 @@ body {
     flex-direction: column;
     
 }
+main {
+    display: flex;
+    flex-direction: column;
+}
 
 header {
     align-self: center;
@@ -14,8 +18,11 @@ header {
     font-size: larger;
     box-shadow: 0 4px 9px 0 darkslategray;
 }
-.main-box {
+.main_box {
+    margin: 10%;
+    
     display: block;
     background-color: burlywood;
-    
+    text-align: center;
+    box-shadow: 0 4px 9px 0 darkslategray;
 }
