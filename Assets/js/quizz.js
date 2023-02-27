@@ -1,4 +1,4 @@
-var headerEL = document.getElementById('header');
+/*var headerEL = document.getElementById('header');
 
 
 function headChange(){
@@ -17,4 +17,5 @@ function headChange(){
 
     }, 1000)
 
-}
+}*/
+
