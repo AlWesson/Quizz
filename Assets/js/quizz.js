@@ -11,7 +11,7 @@ let endSound;
 let questionz = [{pic: ' [image here] ', question: 'There are 2 test tubes placed within a chemical dispenser. The first nozzel dispenses 3mL of chemical at a time, and the second nozzel despenses 2mL at a time. Both nozzles can take away 1mL of chemical from the test tubes at a time. Which pattern of dispensing and taking is correct to get both test tubes to 4mL?', optionz: ['a','b','c','d'], correctAnswer: 1}, {question: 'You can only enable one rail path. Which path should you enable to get the train from point A to point B?'},{},{},{}];
 
 function playThis(){
-    endSound = new Audio("cuckoo_clock1_x.wav");
+    endSound = new Audio("./Assets/sound/cuckoo_clock1_x.wav");
     endSound.play();
 }
 
