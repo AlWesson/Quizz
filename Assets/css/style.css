@@ -17,10 +17,32 @@ header {
     font-size: larger;
     box-shadow: 0 4px 9px 0 darkslategray;
 }
+
+h2 {
+    font-family: fantasy;
+    color: slategray;
+}
+
+h3 {
+    font-family: monospace;
+    font-size: large;
+    color: darkred;
+}
+
+p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+}
+
 .main_box {
     margin: 10%; 
     display: block;
     background-color:beige;
     text-align: center;
     box-shadow: 0 4px 9px 0 darkslategray;
+}
+
+#Start-Quizz {
+    background-color: yellow;
+    border-color: slategray;
+    margin: 1%;
 }
