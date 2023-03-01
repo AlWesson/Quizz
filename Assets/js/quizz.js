@@ -1,4 +1,4 @@
-let quest = document.querySelector("p"); // loading questionz array here.
+let quest = document.querySelector(".quizzContents"); // loading questionz array here.
 let start = document.getElementById("Start-Quizz");
 let timerEl = document.querySelector(".timer");
 let nextQuestion = 0; // questionz array index;
