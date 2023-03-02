@@ -27,7 +27,7 @@ function playThis(){
 }
 
 function everythingNeeded (intake) {
-    
+
 
 }
 
@@ -44,6 +44,7 @@ function setTimer() {
             timeDone();
             // sound file is played when timer reaches 0.
             playThis();
+            //(Note to self: I will need to call a function that will end the quiz when the timer hits 0.)
         }
 
     }, 1000);
@@ -57,7 +58,7 @@ function timeDone() {
     timerEl.textContent = "TIME IS UP!!";
 }
 
- 
+// this will call most of the functions on start event listener.
 function startUpQuizz(event) {
     
     toHide('Start-Quizz');
