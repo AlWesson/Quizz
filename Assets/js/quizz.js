@@ -1,10 +1,11 @@
 let quest = document.querySelector(".quizzContents"); // loading questionz array here.
 let start = document.getElementById("Start-Quizz");
-let timerEl = document.querySelector(".timer");
+let timerEl = document.getElementById("timer");
 let nextQuestion = 0; // questionz array index;
 let remainingTime = 61;
-let timerResult = remainingTime; 
+let timerResult = remainingTime; //variable I'll use to edit time.
 let endSound;
+let quizzPic = document.createElement("img"); // creates an image element.
 
 
 // This will be my array holding img, question text, answer selection, and correct answer.
@@ -15,15 +16,25 @@ function toHide(aSelection) {
     let a = document.getElementById(aSelection);
     a.style.display = 'none';
 }
+function toShow(bSelection) {
+    let b = document.getElementById(bSelection);
+    b.style.display = 'block';
+}
 // function to set a sound file path to the endSound let. It then commands endSound to play the sound file.
 function playThis(){
     endSound = new Audio("./Assets/sound/cuckoo_clock1_x.wav");
     endSound.play();
 }
 
+function everythingNeeded (intake) {
+    
+
+}
+
 // This fucntion sets the timer and starts it when called.
 function setTimer() { 
-    toHide('Start-Quizz');
+    
+    
     var timerInterval = setInterval(function() {
         remainingTime--;
         timerEl.textContent = "Timer: " + remainingTime;
@@ -39,10 +50,24 @@ function setTimer() {
 
 }
 
+
+
 // message to replace the timer. I have this set to trigger when the timer reaches 0;
 function timeDone() {
     timerEl.textContent = "TIME IS UP!!";
 }
 
-// event listener that triggers when the start button is clicked. 
-start.addEventListener("click" , setTimer);
+ 
+function startUpQuizz(event) {
+    
+    toHide('Start-Quizz');
+    toShow('quizzContents');
+    toShow('timer');
+    setTimer();
+    event.preventDefault();
+
+}
+
+
+// event listener that triggers when the start button is clicked.
+start.addEventListener("click" , startUpQuizz);

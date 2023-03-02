@@ -18,16 +18,12 @@ header {
     box-shadow: 0 4px 9px 0 darkslategray;
 }
 
-h2 {
+h3 {
     font-family: fantasy;
     color: slategray;
 }
 
-h3 {
-    font-family: monospace;
-    font-size: large;
-    color: darkred;
-}
+
 
 p {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
@@ -35,10 +31,19 @@ p {
 
 .main_box {
     margin: 10%; 
-    display: block;
+    display: box;
     background-color:beige;
     text-align: center;
     box-shadow: 0 4px 9px 0 darkslategray;
+}
+#timer {
+    display: none;
+    font-family: monospace;
+    font-size: large;
+    color: darkred;
+}
+#quizzContents {
+    display: none;
 }
 
 #Start-Quizz {
