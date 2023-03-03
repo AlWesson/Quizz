@@ -12,10 +12,12 @@ let quizzPic = document.createElement("img"); // creates an image element.
 // input type="radio" can be used when the user must select one of multiple button choices.
 let questionz = [{pic: ' [image here] ', question: 'There are 2 test tubes placed within a chemical dispenser. The first nozzel dispenses 3mL of chemical at a time, and the second nozzel despenses 2mL at a time. Both nozzles can take away 1mL of chemical from the test tubes at a time. Which pattern of dispensing and taking is correct to get both test tubes to 4mL?', optionz: ['a','b','c','d'], correctAnswer: 1}, {pic: ' [image here] ', question: 'You can only enable one rail path. Which path should you enable to get the train from point A to point B?', optionz: ['a','b','c','d'], correctAnswer: 2 },{pic: '[ image here ]', question: ' ', optionz: ['a','b','c','d'], correctAnswer: 0}];
 
+// Hides element
 function toHide(aSelection) {
     let a = document.getElementById(aSelection);
     a.style.display = 'none';
 }
+// Reveals element
 function toShow(bSelection) {
     let b = document.getElementById(bSelection);
     b.style.display = 'block';
@@ -25,9 +27,9 @@ function playThis(){
     endSound = new Audio("./Assets/sound/cuckoo_clock1_x.wav");
     endSound.play();
 }
-
+// Function to pull from the array of objects and placed them into designated location on page.
 function everythingNeeded (intake) {
-
+    
 
 }
 
