@@ -43,6 +43,10 @@ p {
 #quizzContents {
     display: none;
 }
+#leaderboards {
+    display: none;
+    
+}
 #next {
     display: none;
     background-color: yellow;
@@ -58,10 +62,10 @@ p {
     transition: all 0.2s ease-in-out;    
     background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
     background-size: 1800% 1800%;
-    -webkit-animation: rainbow 18s ease infinite;
-    -z-animation: rainbow 18s ease infinite;
-    -o-animation: rainbow 18s ease infinite;
-    animation: rainbow 18s ease infinite;
+    -webkit-animation: rainbow 8s ease infinite;
+    -z-animation: rainbow 8s ease infinite;
+    -o-animation: rainbow 8s ease infinite;
+    animation: rainbow 8s ease infinite;
 }
 
 #Start-Quizz {
@@ -78,10 +82,10 @@ p {
     transition: all 0.2s ease-in-out;    
     background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
     background-size: 1800% 1800%;
-    -webkit-animation: rainbow 18s ease infinite;
-    -z-animation: rainbow 18s ease infinite;
-    -o-animation: rainbow 18s ease infinite;
-    animation: rainbow 18s ease infinite;
+    -webkit-animation: rainbow 8s ease infinite;
+    -z-animation: rainbow 8s ease infinite;
+    -o-animation: rainbow 8s ease infinite;
+    animation: rainbow 8s ease infinite;
 }
 @-webkit-keyframes rainbow {
           0%{background-position:0% 82%}

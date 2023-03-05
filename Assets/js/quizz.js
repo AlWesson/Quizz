@@ -6,6 +6,10 @@ let parentOfPic = document.getElementById("picGoesAfterThis"); // parent of wher
 let quizzPic = document.createElement('img'); 
 let textPortionEl = document.getElementById('textPortion'); // text portion of question.
 let multiChoiceEl = document.querySelectorAll('.multiChoice'); // radio button group class.
+let submitEl = document.getElementById('submit');
+let clearEl = document.getElementById('clearHistory');
+let board = document.getElementById('leaderboards');
+let initialsEl = document.querySelector('#initials');
 
 // All the label ids for my radio buttons.
 let A = document.getElementById('_A');
@@ -35,10 +39,12 @@ function toShow(bSelection) {
     let b = document.getElementById(bSelection);
     b.style.display = 'block';
 }
+function recordUrScore() {
+    localStorage.setItem()
+}
 
-function alterButton () {
-    let next = start;
-
+function clearScores () {
+    localStorage.clear();
 }
 
 // function to set a sound file path to the endSound let. It then commands endSound to play the sound file.
@@ -63,13 +69,31 @@ function quizMaterial () {
 function clearButtons () {
     multiChoiceEl.forEach(choice => choice.checked = false)
 }
-
-function selectedA () {
+function selectedButton () {
     let n;
     multiChoiceEl.forEach(choice => {if(choice.checked){n = choice.id}})
     return n;
 }
 
+nextEl.addEventListener('click',() => {
+    let selected = selectedButton();
+    if(selected){
+        if(selected !== questionz[questionNumber].correctAnswer) {
+            remainingTime = remainingTime - 10;
+        }
+    }
+    questionNumber++;
+    if(questionNumber < questionz.length){
+        clearButtons();
+        quizMaterial();
+    }
+    else {
+        timerResult = remainingTime;
+        toHide('timer');
+    }
+
+
+})
 // This fucntion sets the timer and starts it when called.
 function setTimer() { 
     
@@ -79,20 +103,23 @@ function setTimer() {
         timerEl.textContent = "Timer: " + remainingTime;
         if(remainingTime === 0) {
             clearInterval(timerInterval);
-            // message triggered when timer reaches 0.
-            timeDone();
+            timeDone();// message triggered when timer reaches 0.
             // sound file is played when timer reaches 0.
             playThis();
             //(Note to self: I will need to call a function that will end the quiz when the timer hits 0.)
+            timerResult = 0;
         }
 
     }, 1000);
 
 }
+function quizzDone () {
+    toHide('next');
+    toHide('quizzContents');
+    toShow('leaderbords');
 
-
-
-// message to replace the timer. I have this set to trigger when the timer reaches 0;
+}
+// message to replace the timer. I have this set to trigger when the timer reaches 0.  
 function timeDone() {
     timerEl.textContent = "TIME IS UP!!";
 }
