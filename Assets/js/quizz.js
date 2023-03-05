@@ -13,6 +13,9 @@ let B = document.getElementById('_B');
 let C = document.getElementById('_C');
 let D = document.getElementById('_D');
 
+// button to go to the next question
+let nextEl = document.getElementById('next');
+
 let questionNumber = 0; // questionz array index;
 let remainingTime = 61;
 let timerResult = remainingTime; //variable I'll use to edit time.
@@ -33,6 +36,10 @@ function toShow(bSelection) {
     b.style.display = 'block';
 }
 
+function alterButton () {
+    let next = start;
+
+}
 
 // function to set a sound file path to the endSound let. It then commands endSound to play the sound file.
 function playThis(){
@@ -44,13 +51,23 @@ function quizMaterial () {
 
     let quizArray = questionz[questionNumber];
     quizzPic.setAttribute('src', quizArray.pic);
-    quizzPic.setAttribute("style", "max-width: 720px");
+    quizzPic.setAttribute("style", "max-width: 640px; box-shadow: 0 4px 9px 0 black; border-radius: 12px;");
     parentOfPic.prepend(quizzPic);
     textPortionEl.innerHTML = quizArray.question;
     _A.innerHTML = quizArray.a;
     _B.innerHTML = quizArray.b;
     _C.innerHTML = quizArray.c;
     _D.innerHTML = quizArray.d;
+}
+
+function clearButtons () {
+    multiChoiceEl.forEach(choice => choice.checked = false)
+}
+
+function selectedA () {
+    let n;
+    multiChoiceEl.forEach(choice => {if(choice.checked){n = choice.id}})
+    return n;
 }
 
 // This fucntion sets the timer and starts it when called.
@@ -84,6 +101,7 @@ function timeDone() {
 function startUpQuizz(event) {
     event.preventDefault();
     toHide('Start-Quizz');
+    toShow('next')
     toShow('quizzContents');
     toShow('timer');
     setTimer();
