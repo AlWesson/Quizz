@@ -27,7 +27,7 @@ let endSound; // time's up sound.
 
 
 // This will be my array holding img, question text, answer selection, and correct answer.
-let questionz = [{pic: "./Assets/images/cat.jpg", question: 'There are 2 test tubes placed within a chemical dispenser. The first nozzel dispenses 3mL of chemical at a time, and the second nozzel despenses 2mL at a time. Both nozzles can withdraw 1mL of chemical from the test tubes at a time. Which pattern of dispensing and withdrawing is correct to get both test tubes to 4mL?', a:"", b:"", c:"", d:"", correctAnswer: 'b'}, {pic: ' [image here] ', question: 'You can only enable one rail path. Which path should you enable to get the train from point A to point B?', a:"", b:"", c:"",d:"", correctAnswer: 'c' },{pic: '[ image here ]', question: ' ', a:"", b:"", c:"", d:"", correctAnswer: 'a'}];
+let questionz = [{pic: "./Assets/images/cat.jpg", question: 'There are 2 test tubes placed within a chemical dispenser. The first nozzel dispenses 3mL of chemical at a time, and the second nozzel despenses 2mL at a time. Both nozzles can withdraw 1mL of chemical from the test tubes at a time. Which pattern of dispensing and withdrawing is correct to get both test tubes to 4mL?', a:"", b:"", c:"", d:"", correctAnswer: 'b'}, {pic: './Assets/images/cat.jpg', question: 'You can only enable one rail path. Which path should you enable to get the train from point A to point B?', a:"", b:"", c:"",d:"", correctAnswer: 'c' },{pic: './Assets/images/cat.jpg', question: ' ', a:"", b:"", c:"", d:"", correctAnswer: 'a'}];
 
 // Hides elements function
 function toHide(aSelection) {
@@ -39,14 +39,30 @@ function toShow(bSelection) {
     let b = document.getElementById(bSelection);
     b.style.display = 'block';
 }
+
+function highlights() {
+    yoursEl.textContent = localStorage.getItem('initials') + ' - ' + localStorage.getItem('Score');
+}
 function recordUrScore() {
+    
+    if(initialsEl.value === ""){
+        alert("No initials were input.");
+
+    }
+    else{
+        
+      
     localStorage.setItem('initials', initialsEl.value);
     localStorage.setItem('Score', timerResult);
+    highlights();
+    }
 }
 
 function clearScores () {
     localStorage.clear();
+    yoursEl.textContent = '';
 }
+
 
 // function to set a sound file path to the endSound let. It then commands endSound to play the sound file.
 function playThis(){
