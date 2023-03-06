@@ -9,7 +9,7 @@ let submitEl = document.getElementById('submit');
 let clearEl = document.getElementById('clearHistory');
 let board = document.getElementById('leaderboards');
 let initialsEl = document.querySelector('#initials');
-let yoursEl = document.querySelector("#yours");
+let yoursEl = document.getElementById("yours");
 
 // All the label ids for my radio buttons.
 let A = document.getElementById('_A');
@@ -29,6 +29,8 @@ let endSound; // time's up sound.
 // This will be my array holding img, question text, answer selection, and correct answer.
 let questionz = [{pic: "./Assets/images/cat.jpg", question: 'There are 2 test tubes placed within a chemical dispenser. The first nozzel dispenses 3mL of chemical at a time, and the second nozzel despenses 2mL at a time. Both nozzles can withdraw 1mL of chemical from the test tubes at a time. Which pattern of dispensing and withdrawing is correct to get both test tubes to 4mL?', a:"", b:"", c:"", d:"", correctAnswer: 'b'}, {pic: './Assets/images/cat.jpg', question: 'You can only enable one rail path. Which path should you enable to get the train from point A to point B?', a:"", b:"", c:"",d:"", correctAnswer: 'c' },{pic: './Assets/images/cat.jpg', question: ' ', a:"", b:"", c:"", d:"", correctAnswer: 'a'}];
 
+// ================ I need to make an array of objects to store into and pull from the local storage.===================
+
 // Hides elements function
 function toHide(aSelection) {
     let a = document.getElementById(aSelection);
@@ -40,9 +42,11 @@ function toShow(bSelection) {
     b.style.display = 'block';
 }
 
-function highlights() {
-    yoursEl.textContent = localStorage.getItem('initials') + ' - ' + localStorage.getItem('Score');
-}
+function anotherInitial() {
+    var li = document.createElement("li");
+    yoursEl.appendChild(li);
+    li.textContent = localStorage.getItem('initials') + ' - ' + localStorage.getItem('Score');
+  }
 function recordUrScore() {
     
     if(initialsEl.value === ""){
@@ -54,7 +58,9 @@ function recordUrScore() {
       
     localStorage.setItem('initials', initialsEl.value);
     localStorage.setItem('Score', timerResult);
-    highlights();
+    anotherInitial();
+
+    submitEl.disabled = true;
     }
 }
 
@@ -63,6 +69,18 @@ function clearScores () {
     yoursEl.textContent = '';
 }
 
+function loadBoard () {
+    if (!localStorage.getItem('initials')){
+        yoursEl.textContent = '';
+    }
+    if (!localStorage.getItem('Score')){
+        yoursEl.textContent = '';
+    }  
+    else{
+        anotherInitial();
+    }
+    
+}
 
 // function to set a sound file path to the endSound let. It then commands endSound to play the sound file.
 function playThis(){
@@ -129,6 +147,7 @@ function startUpQuizz(event) {
     toShow('timer');
     setTimer();
     quizMaterial();
+    loadBoard();
     
 
 }
@@ -138,6 +157,7 @@ function quizzDone() {
     toShow('leaderboards');
 
 }
+
 nextEl.addEventListener('click',() => {
     let selected = selectedButton();
     if(selected){
