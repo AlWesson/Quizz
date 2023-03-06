@@ -1,7 +1,6 @@
 let quest = document.querySelector("#quizzContents"); 
 let start = document.getElementById("Start-Quizz");
 let timerEl = document.getElementById("timer");
-//let quezEl = document.getElementById('quez'); // question header
 let parentOfPic = document.getElementById("picGoesAfterThis"); // parent of where I'll dynamically place my images.
 let quizzPic = document.createElement('img'); 
 let textPortionEl = document.getElementById('textPortion'); // text portion of question.
@@ -10,6 +9,7 @@ let submitEl = document.getElementById('submit');
 let clearEl = document.getElementById('clearHistory');
 let board = document.getElementById('leaderboards');
 let initialsEl = document.querySelector('#initials');
+let yoursEl = document.querySelector("#yours");
 
 // All the label ids for my radio buttons.
 let A = document.getElementById('_A');
@@ -40,7 +40,8 @@ function toShow(bSelection) {
     b.style.display = 'block';
 }
 function recordUrScore() {
-    localStorage.setItem()
+    localStorage.setItem('initials', initialsEl.value);
+    localStorage.setItem('Score', timerResult);
 }
 
 function clearScores () {
@@ -74,26 +75,8 @@ function selectedButton () {
     multiChoiceEl.forEach(choice => {if(choice.checked){n = choice.id}})
     return n;
 }
+//
 
-nextEl.addEventListener('click',() => {
-    let selected = selectedButton();
-    if(selected){
-        if(selected !== questionz[questionNumber].correctAnswer) {
-            remainingTime = remainingTime - 10;
-        }
-    }
-    questionNumber++;
-    if(questionNumber < questionz.length){
-        clearButtons();
-        quizMaterial();
-    }
-    else {
-        timerResult = remainingTime;
-        toHide('timer');
-    }
-
-
-})
 // This fucntion sets the timer and starts it when called.
 function setTimer() { 
     
@@ -108,17 +91,14 @@ function setTimer() {
             playThis();
             //(Note to self: I will need to call a function that will end the quiz when the timer hits 0.)
             timerResult = 0;
+            quizzDone();
+            return;
         }
 
     }, 1000);
 
 }
-function quizzDone () {
-    toHide('next');
-    toHide('quizzContents');
-    toShow('leaderbords');
 
-}
 // message to replace the timer. I have this set to trigger when the timer reaches 0.  
 function timeDone() {
     timerEl.textContent = "TIME IS UP!!";
@@ -136,7 +116,31 @@ function startUpQuizz(event) {
     
 
 }
+function quizzDone() {
+    toHide('next');
+    toHide('picGoesAfterThis');
+    toShow('leaderboards');
 
-
+}
+nextEl.addEventListener('click',() => {
+    let selected = selectedButton();
+    if(selected){
+        if(selected !== questionz[questionNumber].correctAnswer) {
+            remainingTime = remainingTime - 10;
+        }
+    }
+    questionNumber++;
+    if(questionNumber < questionz.length){
+        clearButtons();
+        quizMaterial();
+    }
+    else {
+        timerResult = remainingTime;
+        toHide('timer');
+        quizzDone();
+    }
+});
 // event listener that triggers when the start button is clicked.
 start.addEventListener("click" , startUpQuizz);
+submitEl.addEventListener("click", recordUrScore);
+clearEl.addEventListener("click", clearScores);

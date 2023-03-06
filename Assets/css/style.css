@@ -23,7 +23,11 @@ p {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
     color:orange;
 }
-
+h3 {
+    background-color: orange;
+    border-radius: 12px;
+    color: darkslategray;
+}
 .main_box {
     margin: 10%; 
     display: box;
@@ -45,7 +49,7 @@ p {
 }
 #leaderboards {
     display: none;
-    
+
 }
 #next {
     display: none;
@@ -66,6 +70,20 @@ p {
     -z-animation: rainbow 8s ease infinite;
     -o-animation: rainbow 8s ease infinite;
     animation: rainbow 8s ease infinite;
+}
+#submit {
+    background-color: yellow;
+    border-color: slategray;
+    margin: 1%;
+    padding:1%;
+    border-radius: 12px;
+}
+#clearHistory {
+    background-color: yellow;
+    border-color: slategray;
+    margin: 1%;
+    padding:1%;
+    border-radius: 12px;
 }
 
 #Start-Quizz {
