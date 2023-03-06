@@ -71,14 +71,7 @@ h3 {
     -o-animation: rainbow 8s ease infinite;
     animation: rainbow 8s ease infinite;
 }
-#submit {
-    background-color: yellow;
-    border-color: slategray;
-    margin: 1%;
-    padding:1%;
-    border-radius: 12px;
-}
-#clearHistory {
+#submit, #clearHistory, #return{
     background-color: yellow;
     border-color: slategray;
     margin: 1%;

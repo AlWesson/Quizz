@@ -1,4 +1,5 @@
 let quest = document.querySelector("#quizzContents"); 
+let main = document.querySelector("main_box");
 let start = document.getElementById("Start-Quizz");
 let timerEl = document.getElementById("timer");
 let parentOfPic = document.getElementById("picGoesAfterThis"); // parent of where I'll dynamically place my images.
@@ -10,6 +11,7 @@ let clearEl = document.getElementById('clearHistory');
 let board = document.getElementById('leaderboards');
 let initialsEl = document.querySelector('#initials');
 let yoursEl = document.getElementById("yours");
+let re = document.getElementById("return");
 
 // All the label ids for my radio buttons.
 let A = document.getElementById('_A');
@@ -31,6 +33,10 @@ let questionz = [{pic: "./Assets/images/cat.jpg", question: 'There are 2 test tu
 
 // ================ I need to make an array of objects to store into and pull from the local storage.===================
 
+function refresh () {
+    
+    window.location.reload()
+}
 // Hides elements function
 function toHide(aSelection) {
     let a = document.getElementById(aSelection);
@@ -46,7 +52,8 @@ function anotherInitial() {
     var li = document.createElement("li");
     yoursEl.appendChild(li);
     li.textContent = localStorage.getItem('initials') + ' - ' + localStorage.getItem('Score');
-  }
+}
+
 function recordUrScore() {
     
     if(initialsEl.value === ""){
@@ -82,10 +89,23 @@ function loadBoard () {
     
 }
 
-// function to set a sound file path to the endSound let. It then commands endSound to play the sound file.
-function playThis(){
+// function to set a sound file path depending on which option is chosen.
+function playThis(num){
+    if(num === 0){
     endSound = new Audio("./Assets/sound/cuckoo_clock1_x.wav");
     endSound.play();
+    }
+    if(num === 1){
+
+    }
+
+    if(num === 2){
+
+    }
+
+    if(num === 3){
+
+    }
 }
 // Function to pull from the array of objects and placed them into designated location on page.
 function quizMaterial () {
@@ -122,7 +142,7 @@ function setTimer() {
             clearInterval(timerInterval);
             timeDone();// message triggered when timer reaches 0.
             // sound file is played when timer reaches 0.
-            playThis();
+            playThis(0);
             //(Note to self: I will need to call a function that will end the quiz when the timer hits 0.)
             timerResult = 0;
             quizzDone();
@@ -180,3 +200,4 @@ nextEl.addEventListener('click',() => {
 start.addEventListener("click" , startUpQuizz);
 submitEl.addEventListener("click", recordUrScore);
 clearEl.addEventListener("click", clearScores);
+re.addEventListener("click", refresh);
