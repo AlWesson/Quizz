@@ -32,9 +32,8 @@ let scoreArray = [];
 
 
 // This will be my array holding img, question text, answer selection, and correct answer.
-let questionz = [{pic: "./Assets/images/cat.jpg", question: 'There are 2 test tubes placed within a chemical dispenser. The first nozzel dispenses 3mL of chemical at a time, and the second nozzel despenses 2mL at a time. Both nozzles can withdraw 1mL of chemical from the test tubes at a time. Which pattern of dispensing and withdrawing is correct to get both test tubes to 8mL?', a:"", b:"", c:"", d:"", correctAnswer: 'b'}, {pic: './Assets/images/cat.jpg', question: 'You can only enable one rail path. Which path should you enable to get the train from point A to point B?', a:"", b:"", c:"",d:"", correctAnswer: 'c' },{pic: './Assets/images/cat.jpg', question: ' ', a:"", b:"", c:"", d:"", correctAnswer: 'a'}];
+let questionz = [{pic: "./Assets/images/cat.jpg", question: 'There are 2 test tubes placed within a chemical dispenser. The first nozzel dispenses 3mL of chemical at a time, and the second nozzel despenses 2mL at a time. Both nozzles can withdraw 1mL of chemical from the test tubes at a time. Which pattern of dispensing and withdrawing is correct to get both test tubes to 8mL?', a:"dispense x2, withdraw x4, dispense x5", b:"dispense x3, withdraw x2, dispense x1, withdraw x4", c:"withdraw x2, dispense x5, withdraw x8, dispense x1", d:"withdraw x1, dispense x3, withdraw x2", correctAnswer: 'b'}, {pic: './Assets/images/cat.jpg', question: 'You can only enable one rail path. Which path should you enable to get the train from point A to point B?', a:"", b:"", c:"",d:"", correctAnswer: 'c' },{pic: './Assets/images/cat.jpg', question: ' ', a:"", b:"", c:"", d:"", correctAnswer: 'a'}];
 
-// ================ I need to make an array of objects to store into and pull from the local storage.===================
 
 function refresh () {
     
@@ -96,11 +95,21 @@ function loadBoard () {
     }
     
     else{
-        var li = document.createElement("li")
-        li.innerHTML = arr;//JSON.stringify()
-        yoursEl.appendChild(li);
         
+           /*var li = document.createElement("li")
+           li.innerHTML = arr;//JSON.stringify()
+           yoursEl.appendChild(li);*/
         
+        // This shows the leaderboards to the page, but it isnt clean.
+        for(let i = 0; i < scoreArray.length; i++){
+            
+                var li = document.createElement("li")
+                li.innerHTML = JSON.stringify(scoreArray[i]);
+                yoursEl.appendChild(li);
+           
+        }
+        
+
     }
     
 }
