@@ -14,7 +14,7 @@ N/A
 
 ## How to Play
 
-Just click the link below!
+Just click the link!
 (https://alwesson.github.io/Quizz/)
 
 ## License
