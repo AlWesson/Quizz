@@ -27,9 +27,12 @@ let remainingTime = 61;
 let timerResult = remainingTime; //variable I'll use to edit time.
 let endSound; // time's up sound.
 
+let scoreObj = {}; //Initials: '', Score: ''
+let scoreArray = [];
+
 
 // This will be my array holding img, question text, answer selection, and correct answer.
-let questionz = [{pic: "./Assets/images/cat.jpg", question: 'There are 2 test tubes placed within a chemical dispenser. The first nozzel dispenses 3mL of chemical at a time, and the second nozzel despenses 2mL at a time. Both nozzles can withdraw 1mL of chemical from the test tubes at a time. Which pattern of dispensing and withdrawing is correct to get both test tubes to 4mL?', a:"", b:"", c:"", d:"", correctAnswer: 'b'}, {pic: './Assets/images/cat.jpg', question: 'You can only enable one rail path. Which path should you enable to get the train from point A to point B?', a:"", b:"", c:"",d:"", correctAnswer: 'c' },{pic: './Assets/images/cat.jpg', question: ' ', a:"", b:"", c:"", d:"", correctAnswer: 'a'}];
+let questionz = [{pic: "./Assets/images/cat.jpg", question: 'There are 2 test tubes placed within a chemical dispenser. The first nozzel dispenses 3mL of chemical at a time, and the second nozzel despenses 2mL at a time. Both nozzles can withdraw 1mL of chemical from the test tubes at a time. Which pattern of dispensing and withdrawing is correct to get both test tubes to 8mL?', a:"", b:"", c:"", d:"", correctAnswer: 'b'}, {pic: './Assets/images/cat.jpg', question: 'You can only enable one rail path. Which path should you enable to get the train from point A to point B?', a:"", b:"", c:"",d:"", correctAnswer: 'c' },{pic: './Assets/images/cat.jpg', question: ' ', a:"", b:"", c:"", d:"", correctAnswer: 'a'}];
 
 // ================ I need to make an array of objects to store into and pull from the local storage.===================
 
@@ -37,54 +40,67 @@ function refresh () {
     
     window.location.reload()
 }
+
 // Hides elements function
 function toHide(aSelection) {
     let a = document.getElementById(aSelection);
     a.style.display = 'none';
 }
+
 // Reveals elements function
 function toShow(bSelection) {
     let b = document.getElementById(bSelection);
     b.style.display = 'block';
 }
 
-function anotherInitial() {
-    var li = document.createElement("li");
-    yoursEl.appendChild(li);
-    li.textContent = localStorage.getItem('initials') + ' - ' + localStorage.getItem('Score');
-}
-
+// adding new scores to the local storage and recording to the page via loadBoard call. 
 function recordUrScore() {
     
     if(initialsEl.value === ""){
         alert("No initials were input.");
-
     }
     else{
         
-      
-    localStorage.setItem('initials', initialsEl.value);
-    localStorage.setItem('Score', timerResult);
-    anotherInitial();
+        scoreObj.Initials = initialsEl.value;
+        scoreObj.Score = timerResult;
+        //let reScore = JSON.parse(scoreArray);
+        //reScore.push(scoreObj);
+        //console.log(scoreObj);
+        //scoreArray = JSON.parse(scoreArray);
+        scoreArray.push(scoreObj);
+        clearScores();
+        localStorage.setItem('scoreArray', JSON.stringify(scoreArray));
 
-    submitEl.disabled = true;
+        loadBoard();
+        playThis(1);
+
+        submitEl.disabled = true;
     }
 }
 
+// clears initials and scores from local storage.
 function clearScores () {
     localStorage.clear();
     yoursEl.textContent = '';
 }
 
+// loads local storage and writes to the leaderboard.
 function loadBoard () {
-    if (!localStorage.getItem('initials')){
+    scoreArray = localStorage.getItem('scoreArray');
+    let arr = localStorage.getItem('scoreArray');
+    scoreArray = JSON.parse(scoreArray);
+    //console.log(scoreArray);
+    if (!localStorage.getItem('scoreArray')){
         yoursEl.textContent = '';
+        scoreArray = [];
     }
-    if (!localStorage.getItem('Score')){
-        yoursEl.textContent = '';
-    }  
+    
     else{
-        anotherInitial();
+        var li = document.createElement("li")
+        li.innerHTML = arr;//JSON.stringify()
+        yoursEl.appendChild(li);
+        
+        
     }
     
 }
@@ -96,15 +112,12 @@ function playThis(num){
     endSound.play();
     }
     if(num === 1){
-
-    }
-
+        endSound = new Audio("./Assets/sound/drum_roll_y.wav");
+        endSound.play();
+    }  
     if(num === 2){
-
-    }
-
-    if(num === 3){
-
+        endSound = new Audio("./Assets/sound/coin_flip.wav");
+        endSound.play();
     }
 }
 // Function to pull from the array of objects and placed them into designated location on page.
@@ -124,9 +137,10 @@ function quizMaterial () {
 function clearButtons () {
     multiChoiceEl.forEach(choice => choice.checked = false)
 }
+
 function selectedButton () {
     let n;
-    multiChoiceEl.forEach(choice => {if(choice.checked){n = choice.id}})
+    multiChoiceEl.forEach(choice => {if(choice.checked){n = choice.id;}})
     return n;
 }
 //
@@ -139,14 +153,18 @@ function setTimer() {
         remainingTime--;
         timerEl.textContent = "Timer: " + remainingTime;
         if(remainingTime === 0) {
-            clearInterval(timerInterval);
+            
             timeDone();// message triggered when timer reaches 0.
-            // sound file is played when timer reaches 0.
-            playThis(0);
-            //(Note to self: I will need to call a function that will end the quiz when the timer hits 0.)
+            
+            playThis(0);// sound file is played when timer reaches 0.
+            clearInterval(timerInterval);
             timerResult = 0;
             quizzDone();
-            return;
+            
+        }
+        // if quiz is done before the timer, then remainingTime is set to -1 inside of the quizzDone function and is stopped here.
+        if(remainingTime <= -1){
+            clearInterval(timerInterval);
         }
 
     }, 1000);
@@ -169,16 +187,23 @@ function startUpQuizz(event) {
     quizMaterial();
     loadBoard();
     
+    
 
 }
 function quizzDone() {
     toHide('next');
     toHide('picGoesAfterThis');
     toShow('leaderboards');
+    remainingTime = -1;
 
 }
 
+
+
 nextEl.addEventListener('click',() => {
+    let mulChecked = document.querySelector('input[type=radio][name=optionz]:checked');
+    if(mulChecked === null){alert("please make a selection.");}
+    else{
     let selected = selectedButton();
     if(selected){
         if(selected !== questionz[questionNumber].correctAnswer) {
@@ -189,12 +214,15 @@ nextEl.addEventListener('click',() => {
     if(questionNumber < questionz.length){
         clearButtons();
         quizMaterial();
+        playThis(2);
     }
     else {
         timerResult = remainingTime;
-        toHide('timer');
+        toHide('timer'); 
+        playThis(2);
         quizzDone();
     }
+}
 });
 // event listener that triggers when the start button is clicked.
 start.addEventListener("click" , startUpQuizz);

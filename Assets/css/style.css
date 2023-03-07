@@ -18,7 +18,10 @@ header {
     border-radius: 12px;
 }
 
-
+p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+    color:orange;
+}
 ul {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
     color:orange;
