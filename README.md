@@ -4,7 +4,7 @@ Quizz is just that, a quiz. Try to get a good score!
 
 ## Discription
 
-![alt text](https://github.com/AlWesson/Quizz/Assets/images/SC_1.png?raw=true)
+![alt text](https://raw.githubusercontent.com/AlWesson/Quizz/master/Assets/images/SC_1.png)
 
 Quizz is a web-based multiple choice quiz that asks the user question while the timer counts down. Your score will be your remaining time post-quiz.
 
